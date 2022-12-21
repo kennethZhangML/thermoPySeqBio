@@ -2,6 +2,8 @@
 
 Gene Sequence Stability Analysis and Prediction Project
 
+![alt text]([http://url/to/img.png](https://www.thoughtco.com/thmb/uI1I7HsBix-fiWfOeT2g2-OSSxw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/illustration-of-a-restriction-enzyme-restriction-enzymes-also-known-as-restriction-endonucleases-are-enzymes-that-cut-a-dna-molecule-at-a-particular-place-578457799-5728e5b85f9b589e34c5d5c2.jpg))
+
 Thermostability refers to the ability of an enzyme to maintain its activity and structural integrity under high temperatures. Enzymes are proteins that catalyze chemical reactions in living cells, and they are typically optimally active within a certain temperature range. However, some enzymes are able to retain their activity and structure at higher temperatures, making them thermostable.
 
 There are several factors that contribute to the thermostability of enzymes. One factor is the stability of the enzyme's active site, which is the region where substrate molecules bind and the chemical reaction takes place. The active site may be stabilized by the presence of specific amino acids or by the overall structure of the enzyme.
