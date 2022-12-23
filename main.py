@@ -51,7 +51,7 @@ def wrangle_data():
 
     test_dataset = torch.tensor((test_df.values), dtype=torch.long)
     return train_df, test_df, pH_map, test_df, test_dataset, protein_sequences, protein_lengths
-
+        
 
 PATH = "C:/Users/kzhan/Desktop/thermoPySeqBio/state_dict"
 model = el.EnzymeStabilityRegressor(222)
@@ -59,6 +59,7 @@ model.load_state_dict(torch.load(os.path.join(PATH, "lstmEmbed.pth")))
 
 train_df, test_df, pH_map, test_df, test_dataset, protein_sequences, protein_lengths = wrangle_data()
 pred_df = el.create_preds(test_dataset, test_df, protein_sequences, protein_lengths, model)
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 with col1:
@@ -94,7 +95,26 @@ with col1:
         return outputs'''
     
     st.code(code, language = "python")
-    
+
+
+def make_input_pred(input_sequence, pH_map):
+    input_list = [input_sequence]
+    input_df = pd.DataFrame()
+    input_df["protein_sequence"] = input_list
+    input_seq_df = pd.DataFrame(input_df["protein_sequence"].apply(list).tolist())
+    input_seq_df = input_seq_df.replace(pH_map)
+    input_df = input_df.join(input_seq_df)
+    input_df = input_df.drop(columns=['protein_sequence'])
+    return input_df
+
+@st.cache
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
+
+if "visibility" not in st.session_state:
+    st.session_state.visibility = "visible"
+    st.session_state.disabled = False
+
 
 with col2:
     st.subheader("Distribution of pH's of Enzymes")
@@ -108,16 +128,32 @@ with col2:
     if st.button("Make Predictions on Sample Test Dataset"):
         st.write(pred_df)
     else: 
-        st.write("Or...")
-        uploaded_file = st.file_uploader("Choose a file: ")
-        if uploaded_file is not None:
-            uploaded_df = pd.read_csv(uploaded_file)
-            st.write(uploaded_df)
-        else:
-            st.write("Uploaded file must contain Protein Sequences and corresponding pH.")
-            st.write("Below is an example dataset: ")
-            st.image("sampleData.png")
+        st.write("Or, paste a Protein Sequence here")
 
+        input_sequence = st.text_input("Protein Sequence: ")
+
+        if input_sequence:
+            input_df = make_input_pred(input_sequence, pH_map)
+            input_test = torch.tensor((input_df.values), dtype = torch.long)
+            st.write(model.load_state_dict(torch.load(os.path.join(PATH, "lstmEmbed.pth"))))
+            output = model(input_test.to(device)).to(device)
+            result = output.cpu().data.numpy()
+            
+            st.write("Predicted Thermostability Coefficient: ", result[0][0])
+            st.write("Breakdown of Inputted Protein Sequence: ", input_df)
+            st.write("*The breakdown of the extracted features from the protein sequence are in the dataframe generated above and can be downloaded.")
+            
+            input_csv = convert_df(input_df)
+            
+            st.download_button(
+                label="Download Breakdown as CSV",
+                data = input_csv,
+                file_name='sequence_Feature_breakdown.csv'
+            )
+
+        else:
+            st.write("")
+            
 
 st.write("--------------------------------------------------")
 st.markdown("<h2 style='text-align: center; color: white;'>Enzyme Dataset Summary Stats</h2>", unsafe_allow_html=True)
