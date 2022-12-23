@@ -53,7 +53,7 @@ def wrangle_data():
     return train_df, test_df, pH_map, test_df, test_dataset, protein_sequences, protein_lengths
         
 
-PATH = "C:/Users/kzhan/Desktop/thermoPySeqBio/state_dict"
+PATH = "thermoPySeqBio/state_dict"
 model = el.EnzymeStabilityRegressor(222)
 model.load_state_dict(torch.load(os.path.join(PATH, "lstmEmbed.pth")))
 
