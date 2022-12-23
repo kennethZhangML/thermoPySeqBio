@@ -1,4 +1,4 @@
-# Thermochemical Stability Predition Regressor App
+# Thermochemical Stability Prediction Project
 
 Gene Sequence Stability Analysis and Prediction Project
 
