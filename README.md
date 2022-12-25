@@ -2,9 +2,13 @@
 
 Gene Sequence Stability Analysis and Prediction Project
 
-<img src="https://www.thoughtco.com/thmb/uI1I7HsBix-fiWfOeT2g2-OSSxw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/illustration-of-a-restriction-enzyme-restriction-enzymes-also-known-as-restriction-endonucleases-are-enzymes-that-cut-a-dna-molecule-at-a-particular-place-578457799-5728e5b85f9b589e34c5d5c2.jpg" alt="drawing" width="600"/>
+How to Run:
 
-
+1. Clone the repo
+2. Open a new terminal and the run the command below:
+'''python
+streamlit run main.py
+'''
 
 Thermostability refers to the ability of an enzyme to maintain its activity and structural integrity under high temperatures. Enzymes are proteins that catalyze chemical reactions in living cells, and they are typically optimally active within a certain temperature range. However, some enzymes are able to retain their activity and structure at higher temperatures, making them thermostable.
 
