@@ -139,7 +139,7 @@ with col2:
             output = model(input_test.to(device)).to(device)
             result = output.cpu().data.numpy()
             
-            st.write("Predicted Thermostability Coefficient: ", result[0][0])
+            st.write("Predicted Thermostability Coefficient: ", result[0][0] * 1000)
             st.write("Breakdown of Inputted Protein Sequence: ", input_df)
             st.write("*The breakdown of the extracted features from the protein sequence are in the dataframe generated above and can be downloaded.")
             
