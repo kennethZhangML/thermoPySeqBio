@@ -6,9 +6,9 @@ How to Run:
 
 1. Clone the repo
 2. Open a new terminal and the run the command below:
-'''python
+```python
 streamlit run main.py
-'''
+```
 
 Thermostability refers to the ability of an enzyme to maintain its activity and structural integrity under high temperatures. Enzymes are proteins that catalyze chemical reactions in living cells, and they are typically optimally active within a certain temperature range. However, some enzymes are able to retain their activity and structure at higher temperatures, making them thermostable.
 
